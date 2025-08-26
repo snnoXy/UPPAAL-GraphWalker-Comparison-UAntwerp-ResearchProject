@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.6//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_6.dtd'>
+<nta>
+	<declaration>// Edge IDs for tracking coverage
+const int e_GoTo_News_Page = 0;
+const int e_Scroll_Horizontal = 1;
+const int e_Click_New = 2;
+const int e_NavigateBack = 3;
+const int e_GoTo_Search_Page = 4;
+const int e_Click_Search_Bar = 5;
+const int e_Valid_Input = 6;
+const int e_Invalid_Input = 7;
+const int e_Wait_For_Search = 8;
+const int e_Wait_For_Search_Invalid = 9;
+const int e_Clear_Search_Bar = 10;
+const int e_Click_First_New = 11;
+const int e_NavigateBack_From_First_New = 12;
+const int e_Save_First_New = 13;
+const int e_Go_To_Saved = 14;
+const int e_Click_First_SavedNew = 15;
+const int e_NavigateBack_From_Saved_New = 16;
+const int e_Go_To_Profile = 17;
+const int e_Go_To_Saved_From_Profile = 18;
+const int e_Click_HelpTool_Button = 19;
+const int e_NoAction_From_Help = 20;
+const int e_NoAction_From_Search_Bar = 21;
+const int e_NoAction_From_News = 22;
+const int e_NoAction_From_Saved = 23;
+const int e_Go_To_News_From_Dummy = 24;
+
+const int NUM_EDGES = 25; // Total number of edges
+
+// Array to track visited edges
+bool visited[NUM_EDGES];
+
+int __reach__ = 0;
+int __single__ = 0;</declaration>
+	<template>
+		<name x="5" y="5">Template</name>
+		<declaration>// Place local declarations here. </declaration>
+		<location id="id0" x="-450" y="0">
+			<name x="-535" y="-8">v_Start</name>
+			<label kind="testcodeExit">v_Start</label>
+		</location>
+		<location id="id1" x="-289" y="-152">
+			<name x="-297" y="-187">v_ScrolledHorizontal</name>
+			<label kind="testcodeEnter">v_ScrolledHorizontal</label>
+		</location>
+		<location id="id2" x="59" y="161">
+			<name x="-17" y="118">v_SearchPage_SHARED</name>
+			<label kind="testcodeEnter">v_SearchPage_SHARED</label>
+		</location>
+		<location id="id3" x="-68" y="0">
+			<name x="-78" y="-34">v_NewVisible</name>
+			<label kind="testcodeEnter">v_NewVisible</label>
+		</location>
+		<location id="id4" x="-289" y="0">
+			<name x="-306" y="-34">v_NewsPage</name>
+			<label kind="testcodeEnter">v_NewsPage</label>
+		</location>
+		<location id="id5" x="315" y="162">
+			<name x="305" y="128">v_Help_Tool_Clicked</name>
+			<label kind="testcodeEnter">v_Help_Tool_Clicked</label>
+		</location>
+		<location id="id6" x="68" y="340">
+			<name x="58" y="306">v_Search_Bar_Clicked</name>
+			<label kind="testcodeEnter">v_Search_Bar_Clicked</label>
+		</location>
+		<location id="id7" x="323" y="340">
+			<name x="313" y="306">v_Valid_Input_Set</name>
+			<label kind="testcodeEnter">v_Valid_Input_Set</label>
+		</location>
+		<location id="id8" x="348" y="484">
+			<name x="338" y="450">v_New_Not_Found</name>
+			<label kind="testcodeEnter">v_New_Not_Found</label>
+		</location>
+		<location id="id9" x="68" y="484">
+			<name x="58" y="450">v_Invalid_Input_Set</name>
+			<label kind="testcodeEnter">v_Invalid_Input_Set</label>
+		</location>
+		<location id="id10" x="536" y="340">
+			<name x="526" y="306">v_New_Found</name>
+			<label kind="testcodeEnter">v_New_Found</label>
+		</location>
+		<location id="id11" x="646" y="204">
+			<name x="636" y="170">v_First_New_Visible</name>
+			<label kind="testcodeEnter">v_First_New_Visible</label>
+		</location>
+		<location id="id12" x="663" y="493">
+			<name x="595" y="510">v_First_New_Saved</name>
+			<label kind="testcodeEnter">v_First_New_Saved</label>
+		</location>
+		<location id="id13" x="816" y="383">
+			<name x="806" y="349">v_SavedPage_SHARED</name>
+			<label kind="testcodeEnter">v_SavedPage_SHARED</label>
+		</location>
+		<location id="id14" x="807" y="119">
+			<name x="797" y="85">v_DummySHARED</name>
+			<label kind="testcodeEnter">v_DummySHARED</label>
+		</location>
+		<location id="id15" x="1105" y="382">
+			<name x="1095" y="348">v_ProfilePage</name>
+			<label kind="testcodeEnter">v_ProfilePage</label>
+		</location>
+		<location id="id16" x="824" y="595">
+			<name x="814" y="561">v_Saved_New_Visible</name>
+			<label kind="testcodeEnter">v_Saved_New_Visible</label>
+		</location>
+		<init ref="id0"/>
+		<transition id="id17">
+			<source ref="id15"/>
+			<target ref="id13"/>
+			<label kind="assignment" x="892" y="433">visited[e_Go_To_Saved_From_Profile] = true</label>
+			<label kind="testcode">e_Go_To_Saved</label>
+			<nail x="960" y="425"/>
+		</transition>
+		<transition id="id18">
+			<source ref="id16"/>
+			<target ref="id13"/>
+			<label kind="assignment" x="433" y="544">visited[e_NavigateBack_From_Saved_New] = true</label>
+			<label kind="testcode">e_NavigateBack</label>
+			<nail x="790" y="501"/>
+		</transition>
+		<transition id="id19">
+			<source ref="id13"/>
+			<target ref="id16"/>
+			<label kind="assignment" x="824" y="484">visited[e_Click_First_SavedNew] = true</label>
+			<label kind="testcode">e_Click_First_SavedNew</label>
+		</transition>
+		<transition id="id20">
+			<source ref="id13"/>
+			<target ref="id15"/>
+			<label kind="assignment" x="858" y="365">visited[e_Go_To_Profile] = true</label>
+			<label kind="testcode">e_Go_To_Profile</label>
+		</transition>
+		<transition id="id21">
+			<source ref="id14"/>
+			<target ref="id4"/>
+			<label kind="assignment" x="204" y="34">visited[e_Go_To_News_From_Dummy] = true</label>
+			<label kind="testcode">e_GoTo_News_Page</label>
+		</transition>
+		<transition id="id22">
+			<source ref="id13"/>
+			<target ref="id14"/>
+			<label kind="assignment" x="811" y="217">visited[e_NoAction_From_Saved] = true</label>
+			<label kind="testcode">e_NoAction</label>
+		</transition>
+		<transition id="id23">
+			<source ref="id12"/>
+			<target ref="id13"/>
+			<label kind="assignment" x="612" y="425">visited[e_Go_To_Saved] = true</label>
+			<label kind="testcode">e_Go_To_Saved</label>
+		</transition>
+		<transition id="id24">
+			<source ref="id10"/>
+			<target ref="id12"/>
+			<label kind="assignment" x="518" y="399">visited[e_Save_First_New] = true</label>
+			<label kind="testcode">e_Save_First_New</label>
+		</transition>
+		<transition id="id25">
+			<source ref="id11"/>
+			<target ref="id10"/>
+			<label kind="assignment" x="357" y="229">visited[e_NavigateBack_From_First_New] = true</label>
+			<label kind="testcode">e_NavigateBack</label>
+			<nail x="510" y="255"/>
+		</transition>
+		<transition id="id26">
+			<source ref="id10"/>
+			<target ref="id11"/>
+			<label kind="assignment" x="552" y="272">visited[e_Click_First_New] = true</label>
+			<label kind="testcode">e_Click_First_New</label>
+		</transition>
+		<transition id="id27">
+			<source ref="id7"/>
+			<target ref="id10"/>
+			<label kind="assignment" x="323" y="348">visited[e_Wait_For_Search] = true</label>
+		</transition>
+		<transition id="id28">
+			<source ref="id8"/>
+			<target ref="id6"/>
+			<label kind="assignment" x="161" y="391">visited[e_Clear_Search_Bar] = true</label>
+			<label kind="testcode">e_Clear_Search_Bar</label>
+		</transition>
+		<transition id="id29">
+			<source ref="id9"/>
+			<target ref="id8"/>
+			<label kind="assignment" x="68" y="501">visited[e_Wait_For_Search_Invalid] = true</label>
+			<label kind="testcode">e_Wait_For_Search</label>
+		</transition>
+		<transition id="id30">
+			<source ref="id6"/>
+			<target ref="id9"/>
+			<label kind="assignment" x="-102" y="399">visited[e_Invalid_Input] = true</label>
+			<label kind="testcode">e_Invalid_Input</label>
+		</transition>
+		<transition id="id31">
+			<source ref="id6"/>
+			<target ref="id7"/>
+			<label kind="assignment" x="85" y="340">visited[e_Valid_Input] = true</label>
+		</transition>
+		<transition id="id32">
+			<source ref="id6"/>
+			<target ref="id2"/>
+			<label kind="assignment" x="-331" y="229">visited[e_NoAction_From_Search_Bar] = true</label>
+			<label kind="testcode">e_NoAction</label>
+			<nail x="9" y="230"/>
+		</transition>
+		<transition id="id33">
+			<source ref="id2"/>
+			<target ref="id6"/>
+			<label kind="assignment" x="68" y="229">visited[e_Click_Search_Bar] = true</label>
+			<label kind="testcode">e_Click_Search_Bar</label>
+		</transition>
+		<transition id="id34">
+			<source ref="id5"/>
+			<target ref="id2"/>
+			<label kind="assignment" x="127" y="110">visited[e_NoAction_From_Help] = true</label>
+			<label kind="testcode">e_NoAction</label>
+			<nail x="170" y="136"/>
+		</transition>
+		<transition id="id35">
+			<source ref="id2"/>
+			<target ref="id5"/>
+			<label kind="assignment" x="68" y="170">visited[e_Click_HelpTool_Button] = true</label>
+			<label kind="testcode">e_Click_HelpTool_Button</label>
+		</transition>
+		<transition id="id36">
+			<source ref="id4"/>
+			<target ref="id2"/>
+			<label kind="assignment" x="-280" y="102">visited[e_GoTo_Search_Page] = true</label>
+			<label kind="testcode">e_GoTo_Search_Page</label>
+			<nail x="-280" y="9"/>
+		</transition>
+		<transition id="id37">
+			<source ref="id3"/>
+			<target ref="id4"/>
+			<label kind="assignment" x="-280" y="-17">visited[e_NavigateBack] = true</label>
+			<label kind="testcode">e_NavigateBack</label>
+		</transition>
+		<transition id="id38">
+			<source ref="id1"/>
+			<target ref="id3"/>
+			<label kind="assignment" x="-204" y="-127">visited[e_Click_New] = true</label>
+			<label kind="testcode">e_Click_New</label>
+		</transition>
+		<transition id="id39">
+			<source ref="id4"/>
+			<target ref="id1"/>
+			<label kind="assignment" x="-442" y="-110">visited[e_Scroll_Horizontal] = true</label>
+			<label kind="testcode">e_Scroll_Horizontal</label>
+		</transition>
+		<transition id="id40">
+			<source ref="id4"/>
+			<target ref="id0"/>
+			<label kind="assignment" x="-510" y="51">visited[e_NoAction_From_News] = true</label>
+			<label kind="testcode">e_NoAction</label>
+			<nail x="-365" y="43"/>
+		</transition>
+		<transition id="id41">
+			<source ref="id0"/>
+			<target ref="id4"/>
+			<label kind="assignment" x="-544" y="-42">visited[e_GoTo_News_Page] = true</label>
+			<label kind="testcode">e_GoTo_News_Page</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+Process = Template();
+system Process;</system>
+	<queries>
+		<query>
+			<formula>E&lt;&gt; forall(i : int[0, NUM_EDGES-1]) visited[i]</formula>
+			<comment>Check if there exists a path that covers all edges</comment>
+			<result outcome="success" type="quality" timestamp="2025-05-12 22:19:19 +0200">
+			</result>
+		</query>
+	</queries>
+</nta>

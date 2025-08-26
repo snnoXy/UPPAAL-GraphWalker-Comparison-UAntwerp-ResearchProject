@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.6//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_6.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+int __reach__ = 0;
+int __single__ = 0;
+
+const int e_ClickSearchBar = 0 ;
+const int e_SearchItem = 1;
+const int e_ClickSearchButton = 2;
+const int e_SearchAnotherItem = 3;
+const int e_RepeatTheProccess = 4;
+
+const int NUM_EDGES = 5; // Total number of edges
+
+// Array to track visited edges
+bool visited[NUM_EDGES];
+</declaration>
+	<template>
+		<name x="5" y="5">System</name>
+		<declaration>// Place local declarations here.
+</declaration>
+		<location id="id0" x="-629" y="-246">
+			<name x="-639" y="-280">v_MainScreenView</name>
+			<label kind="testcodeEnter">v_MainScreenView()</label>
+			<label kind="testcodeExit">v_MainScreenView()</label>
+		</location>
+		<location id="id1" x="-629" y="0">
+			<name x="-639" y="-34">v_SearchBarClicked</name>
+			<label kind="testcodeEnter">v_SearchBarClicked()</label>
+		</location>
+		<location id="id2" x="-374" y="8">
+			<name x="-384" y="-26">v_ItemTyped</name>
+			<label kind="testcodeEnter">v_ItemTyped()</label>
+		</location>
+		<location id="id3" x="-374" y="238">
+			<name x="-384" y="204">v_ItemDisplayed</name>
+			<label kind="testcodeEnter">v_ItemDisplayed()</label>
+		</location>
+		<location id="id4" x="501" y="238">
+			<name x="450" y="204">v_SecondItemDisplayed</name>
+			<label kind="testcodeEnter">v_SecondItemDisplayed()</label>
+		</location>
+		<init ref="id0"/>
+		<transition id="id5">
+			<source ref="id4"/>
+			<target ref="id0"/>
+			<label kind="assignment" x="-212" y="-93">visited[e_RepeatTheProccess] = true</label>
+			<label kind="testcode">e_RepeatTheProccess()</label>
+		</transition>
+		<transition id="id6">
+			<source ref="id3"/>
+			<target ref="id4"/>
+			<label kind="assignment" x="-119" y="255">visited[e_SearchAnotherItem] = true</label>
+			<label kind="testcode">e_SearchAnotherItem()</label>
+		</transition>
+		<transition id="id7">
+			<source ref="id2"/>
+			<target ref="id3"/>
+			<label kind="assignment" x="-374" y="123">visited[e_ClickSearchButton] = true</label>
+			<label kind="testcode">e_ClickSearchButton()</label>
+		</transition>
+		<transition id="id8">
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="assignment" x="-620" y="17">visited[e_SearchItem] = true</label>
+			<label kind="testcode">e_SearchItem()</label>
+		</transition>
+		<transition id="id9">
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="assignment" x="-629" y="-123">visited[e_ClickSearchBar] = true</label>
+			<label kind="testcode">e_ClickSearchBar()</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+Process = System();
+// List one or more processes to be composed into a system.
+system Process;
+
+/** TEST_FILENAME uppaalModelTest- */
+</system>
+	<queries>
+		<query>
+			<formula>E&lt;&gt; forall(i : int[0, NUM_EDGES-1]) visited[i]</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2025-05-23 00:36:33 +0200">
+			</result>
+		</query>
+	</queries>
+</nta>
